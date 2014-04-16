@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Physics3D</title>
+		<link href="styles.css" rel="stylesheet" type="text/css">
+		<script type="x-shader/x-vertex" id="vertexshader">
+			attribute float size;
+			attribute vec3 pcolor;
+			varying vec3 vColor;
+			void main() {
+				vColor = pcolor;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_PointSize = size * ( 200.0 / length( mvPosition.xyz ) );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+		<script type="x-shader/x-fragment" id="fragmentshader">
+			uniform sampler2D texture;
+			varying vec3 vColor;
+			void main() {
+				vec4 outColor = texture2D( texture, gl_PointCoord );
+				gl_FragColor = outColor * vec4( vColor, 1.0 );
+			}
+		</script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<div id="container"></div>
+	</body>
+	<script type="text/javascript" src="lib/impact/impact.js"></script>
+	<script type="text/javascript" src="lib/game/main.js"></script>
+	<script type="text/javascript" src="lib/three.js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="lib/three.js/three.js"></script>
+	<script type="text/javascript" src="lib/three.js/stats.min.js"></script>
+	<script type="text/javascript" src="lib/three.js/dat.gui.min.js"></script>
+	<script type="text/javascript" src="lib/three.js/Tween.js"></script>
+	<script type="text/javascript" src="lib/three.js/Sparks.js"></script>
+	<script type="text/javascript" src="lib/three.js/jetpackFlame.js"></script>
+	<script type="text/javascript" src="lib/impact-wrapper.js"></script>
+	<script type="text/javascript" src="lib/three.js/main.js"></script>
+</html>

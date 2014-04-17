@@ -10,6 +10,7 @@ html,body
 #canvas 
 {
 	float:right;
+    display:none;
 }
 #container 
 {
